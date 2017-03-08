@@ -21,16 +21,16 @@ class Point {
   num velY = 0;
 
   Point(this.x, this.y) {
-      velX = random.nextInt(100);
-      velY = random.nextInt(100);
+    velX = random.nextInt(100);
+    velY = random.nextInt(100);
   }
 
   draw(var gradient) {
     ctx.beginPath();
     ctx.strokeStyle = gradient;
     ctx.lineWidth = 2;
-    ctx.moveTo(prevX,prevY);
-    ctx.lineTo(x,y);
+    ctx.moveTo(prevX, prevY);
+    ctx.lineTo(x, y);
     ctx.closePath();
     ctx.stroke();
   }
@@ -38,19 +38,21 @@ class Point {
   update(var delta) {
     prevX = x;
     prevY = y;
-    x += velX/20 ;
-    y += velY/20 ;
+    x += velX / 30;
+    y += velY / 30;
     _timePassed += delta;
     if (_timePassed > interval) {
       _timePassed = 0;
-        velX = random.nextInt(200) - 100;
-        velY = random.nextInt(200) - 100;
+      velX = random.nextInt(200) - 100;
+      velY = random.nextInt(200) - 100;
     }
     if (x > ctx.canvas.width || x < 0) {
-      velX = -velX;
+      x = random.nextInt(1920);
+      prevX = x;
     }
     if (y > ctx.canvas.height || y < 0) {
-      velY = -velY;
+      y = random.nextInt(1080);
+      prevY = y;
     }
   }
 }
@@ -66,15 +68,14 @@ main() {
   ctx.canvas.height = window.innerHeight;
   for (var i = 0; i < 50; i++)
     points.add(new Point(random.nextInt(1920), random.nextInt(1080)));
-
   window.animationFrame.then(draw);
 }
 
 draw(num time) {
-  var delta = 0.05;
-  curTime += 0.05;
+  var delta = 0.02;
+  curTime += 0.02;
 
-  if (curTime.toInt() % 15 == 0) {
+  if (curTime.toInt() % 7 == 0) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
   var gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
