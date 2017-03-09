@@ -21,6 +21,8 @@ class Point {
   num velY = 0;
 
   Point(this.x, this.y) {
+    prevX = x;
+    prevY = y;
     velX = random.nextInt(100);
     velY = random.nextInt(100);
   }
@@ -38,8 +40,8 @@ class Point {
   update(var delta) {
     prevX = x;
     prevY = y;
-    x += velX / 30;
-    y += velY / 30;
+    x += velX / 40;
+    y += velY / 40;
     _timePassed += delta;
     if (_timePassed > interval) {
       _timePassed = 0;
@@ -75,7 +77,7 @@ draw(num time) {
   var delta = 0.02;
   curTime += 0.02;
 
-  if (curTime.toInt() % 7 == 0) {
+  if (curTime.toInt() % 5 == 0) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
   var gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
